@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="logo-no-background.png" class="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="login.html">Login</a></li>
+                <li><a href="preview.html">Preview</a></li>
+                <li><a href="performance_analysis.html">Performance Analysis</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="form-wrapper">
+        <div class="form-container" id="login-form">
+            <h2>Login</h2>
+            <form>
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" name="username" required>
+                
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="password" required>
+                
+                <button type="submit">Login</button>
+                <a href="#forgot-password" class="forgot-password">Forgot Password?</a>
+            </form>
+            <p class="switch-form">Don't have an account? <a href="#" onclick="showRegistration()">Register here</a></p>
+        </div>
+
+        <div class="form-container" id="registration-form" style="display: none;">
+            <h2>Register</h2>
+            <form>
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="first-name" required>
+
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last-name" required>
+
+                <label for="reg-username">Username:</label>
+                <input type="text" id="reg-username" name="username" required>
+
+                <label for="reg-password">Password:</label>
+                <input type="password" id="reg-password" name="password" required>
+
+                <label for="reg-repassword">Re-enter Password:</label>
+                <input type="password" id="reg-repassword" name="repassword" required>
+                
+                <button type="submit">Register</button>
+            </form>
+            <p class="switch-form">Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+        </div>
+    </div>
+
+    <script>
+        function showRegistration() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('registration-form').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('registration-form').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
