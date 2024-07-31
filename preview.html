@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="logo-no-background.png" class="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a class="active" href="preview.html">Preview</a></li>
+                <li><a href="performance_analysis.html">Performance Analysis</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="form-wrapper">
+        <div class="form-container" id="upload-form">
+            <h2>Upload Retina Image</h2>
+            <form id="imageUploadForm" enctype="multipart/form-data">
+                <label for="imageUpload">Select JPG Image:</label>
+                <input type="file" id="imageUpload" name="imageUpload" accept=".jpg, .jpeg" required>
+                <progress id="uploadProgress" value="0" max="100" style="width: 100%; display: none;"></progress>
+                <p id="uploadStatus"></p>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('imageUploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var form = event.target;
+            var formData = new FormData(form);
+            var xhr = new XMLHttpRequest();
+
+            xhr.upload.addEventListener('progress', function(e) {
+                if (e.lengthComputable) {
+                    var percentComplete = (e.loaded / e.total) * 100;
+                    document.getElementById('uploadProgress').style.display = 'block';
+                    document.getElementById('uploadProgress').value = percentComplete;
+                    document.getElementById('uploadStatus').innerText = `Uploading: ${Math.round(percentComplete)}%`;
+                }
+            });
+
+            xhr.addEventListener('load', function() {
+                document.getElementById('uploadStatus').innerText = 'Uploaded!';
+                document.getElementById('uploadProgress').style.display = 'none';
+            });
+
+            xhr.open('POST', '/upload'); // Replace with your server upload endpoint
+            xhr.send(formData);
+        });
+    </script>
+</body>
+</html>
